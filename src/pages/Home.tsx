@@ -1,8 +1,10 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Home.css';
 
 const Home: React.FC = () => {
+  const [presentAlert] = useIonAlert()
+
   return (
     <IonPage>
       <IonHeader>
@@ -16,7 +18,30 @@ const Home: React.FC = () => {
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer />
+        <IonButton
+          onClick={() =>
+            presentAlert({
+              header: 'Share your feedback',
+              buttons: [
+                {
+                  text: 'Cancel',
+                  role: 'cancel',
+                },
+                {
+                  text: 'Share',
+                },
+              ],
+              inputs: [
+                {
+                  name: 'feedback',
+                  label: 'Feedback',
+                },
+              ],
+            })
+          }
+        >
+          Share Feedback
+        </IonButton>
       </IonContent>
     </IonPage>
   );
